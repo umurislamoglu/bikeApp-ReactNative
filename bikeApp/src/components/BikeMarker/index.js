@@ -1,1 +1,1 @@
-export {default} './BikeMarker'
+export {default} from './BikeMarker'
