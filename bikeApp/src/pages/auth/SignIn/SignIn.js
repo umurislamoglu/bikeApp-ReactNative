@@ -1,8 +1,4 @@
-import React,{useState} from 'react'
-import { Text, SafeAreaView } from 'react-native'
-import Input from '../../../components/Input'
-import Button from '../../../components/Button'
-import styles from './SignIn.styles'
+import React from 'react'
 import routes from '../../../navigtion/routes'
 import { useNavigation } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth';
