@@ -1,27 +1,36 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Text, SafeAreaView } from 'react-native'
-import Input from '../../../components/Input'
-import Button from '../../../components/Button'
-import styles from './SignUp.styles'
-import routes from '../../../navigtion/routes'
 import { useNavigation } from '@react-navigation/native'
+import auth from '@react-native-firebase/auth';
+import { Alert } from 'react-native'
+import SignUpLayout from './layout/SignUpLayout'
+
 
 export default function SignUp() {
 
     const navigation = useNavigation()
 
-    const handleSignInPress = ()  => {
-        navigation.navigate(routes.SIGN_IN_PAGE);
-    }
+  
+      function handleSignUp(signUpData) {
+        try {
+          auth().createUserWithEmailAndPassword(signUpData.email, signUpData.password);
+          Alert.alert(
+            'BIKE',
+            'User created. Now you can sign in with your address',
+          );
+          handleReturnSignIn();
+        } catch (error) {
+          console.log(error);
+          Alert.alert('BIKE', 'An error occurred');
+        }
+      }
 
+    const  handleReturnSignIn= () => {
+          if(navigation.canGoBack()){
+          navigation.goBack()
+              
+          }
+      }
 
-    return (
-        <SafeAreaView>
-            <Text style={styles.logo}>🚲</Text>
-            <Input label="Email"/>
-            <Input label="Password"/>
-            <Button title="Sign In" onPress={handleSignInPress}/>
-            <Button title="Sign Up" theme="outline" />
-        </SafeAreaView>
-    )
+    return <SignUpLayout onSignUp={handleSignUp} onGoBack={handleReturnSignIn}/>
 }
