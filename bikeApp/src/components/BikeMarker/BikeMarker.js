@@ -1,10 +1,26 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from 'react';
+import {View} from 'react-native';
+import {Marker} from 'react-native-maps';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function BikeMarker() {
-    return (
-        <View>
-            <Text></Text>
-        </View>
-    )
+import styles from './BikeMarker.styles';
+
+export default function BikeMarker({data, onSelect}) {
+  const {latitude, longitude, inUse} = data;
+
+  const themeColor = inUse ? 'red' : 'blue';
+
+  return (
+    <Marker
+      coordinate={{
+        latitude,
+        longitude,
+      }}
+      onPress={onSelect}
+      >
+      <View style={[styles.container, {borderColor: themeColor}]}>
+        <Icon name="bike" size={20} color={themeColor} />
+      </View>
+    </Marker>
+  );
 }
