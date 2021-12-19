@@ -5,10 +5,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import styles from './BikeMarker.styles';
 
-export default function BikeMarker({data, onSelect}) {
-  const {latitude, longitude, inUse} = data;
+export default function BikeMarker({data, userData ,onSelect}) {
+  const {latitude, longitude, inUse , id} = data;
 
-  const themeColor = inUse ? 'red' : 'blue';
+  let themeColor = inUse ? 'red' : 'blue';
+
+  
+if(!!userData && userData.id === id) {
+  themeColor = "green"
+}
 
   return (
     <Marker
